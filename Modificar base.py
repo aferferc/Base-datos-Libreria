@@ -2,7 +2,7 @@ import sqlite3 #Importa la libreria sqlite3 para hacer la base de datos
 conexion = sqlite3.connect("libreria.db") #conecta o en caso de que no exista crea la base de datos bajo el nombre libreria
 
 def actualizar_registro(id, nuevo_valor):
-    conexion = int(input('''Has seleccionado actualizar regiistro'''))
+    conexion = int(input('''Has seleccionado actualizar registro'''))
     try:
         cursor = conexion.cursor()
         # Aquí cambiaremos la consulta SQL para una actualización
@@ -67,7 +67,7 @@ def crear(): #crea la funcion crear
             return
         finally: #si no sucede ningun error, guarda los cambios y termina la conexion con la base de datos
             conexion.commit
-            conexion.closes
+            conexion.close
     elif entrada_crear == 3:
         try: #trata de ejecutar el programa abajo
             valores_entrada = [(input("inserta la id de la venta")), (input("inserta la id del libro vendido ")), (input("inserta la fecha de venta")), (input("inserta la cantidad de volumenes vendidios")), (input("inserta el precio pagado"))] #recoge los valores pedidos en una variable
@@ -81,7 +81,7 @@ def crear(): #crea la funcion crear
             return
         finally: #si no sucede ningun error, guarda los cambios y termina la conexion con la base de datos
             conexion.commit
-            conexion.closes
+            conexion.close
     else:
         print("Entrada de datos incorrecta, volviendo al menu")
         menu()
@@ -111,7 +111,7 @@ def eliminar(): #crea la funcion eliminar
             return
         finally: #si no sucede ningun error, guarda los cambios y termina la conexion con la base de datos
             conexion.commit
-            conexion.closes
+            conexion.close
     elif entrada_crear == 2:
         try: #trata de ejecutar el programa abajo
             valores_entrada = [(input("inserta la id del autor que desea eliminar"))] #recoge los valores pedidos en una variable
@@ -125,7 +125,7 @@ def eliminar(): #crea la funcion eliminar
             return
         finally: #si no sucede ningun error, guarda los cambios y termina la conexion con la base de datos
             conexion.commit
-            conexion.closes
+            conexion.close
     elif entrada_crear == 3:
         try: #trata de ejecutar el programa abajo
             valores_entrada = [(input("inserta la id de la venta que desea eliminar"))] #recoge los valores pedidos en una variable
@@ -139,7 +139,7 @@ def eliminar(): #crea la funcion eliminar
             return
         finally: #si no sucede ningun error, guarda los cambios y termina la conexion con la base de datos
             conexion.commit
-            conexion.closes
+            conexion.close
     else:
         print("Entrada de datos incorrecta, volviendo al menu")
         menu()
