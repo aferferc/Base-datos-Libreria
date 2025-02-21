@@ -2,26 +2,6 @@ import sqlite3 #Importa la libreria sqlite3 para hacer la base de datos
 conexion = sqlite3.connect("libreria.db") #conecta o en caso de que no exista crea la base de datos bajo el nombre libreria
 
 
-def leer(consulta_tipo, criterio):
-    conexion = int(input('''Has seleccionado hacer consulta UwU'''))
-    try:
-        cursor = conexion.cursor()
-        if consulta_tipo == "por_id":
-            cursor.execute("SELECT * FROM tabla WHERE id = %s", (criterio,))
-        elif consulta_tipo == "por_columna":
-            cursor.execute("SELECT * FROM tabla WHERE columna = %s", (criterio,))
-        else:
-            print("Tipo de consulta no reconocido")
-            return None
-        resultados = cursor.fetchall()
-        return resultados
-    except Exception as e:
-        conexion.rollback()
-        print(f"Error al realizar la consulta: {e}")
-    finally:
-        conexion.close()
-
-
 def crear(): #crea la funcion crear
     entrada_crear = int(input('''Has seleccionado crear un registro, elige el numero de la tabla a la que deseas añadirlo
     1.Libros
