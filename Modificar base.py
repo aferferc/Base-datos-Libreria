@@ -1,20 +1,8 @@
 import sqlite3 #Importa la libreria sqlite3 para hacer la base de datos
 conexion = sqlite3.connect("libreria.db") #conecta o en caso de que no exista crea la base de datos bajo el nombre libreria
 
-def actualizar_registro(id, nuevo_valor):
-    conexion = int(input('''Has seleccionado actualizar registro'''))
-    try:
-        cursor = conexion.cursor()
-        # Aquí cambiaremos la consulta SQL para una actualización
-        cursor.execute("UPDATE tabla SET columna = %s WHERE id = %s", (nuevo_valor, id))
-        conexion.commit()
-    except Exception as e:
-        conexion.rollback()
-        print(f"Error al actualizar el registro: {e}")
-    finally:
-        conexion.close()
 
-def crear_consultas(consulta_tipo, criterio):
+def leer(consulta_tipo, criterio):
     conexion = int(input('''Has seleccionado hacer consulta UwU'''))
     try:
         cursor = conexion.cursor()
@@ -86,11 +74,66 @@ def crear(): #crea la funcion crear
         print("Entrada de datos incorrecta, volviendo al menu")
         menu()
 
-def leer(): #crea la funcion leer
-    print(2)
+def leer():
+    entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el tipo de consulta
+    1. Consulta por ID
+    2. Consulta por Columna
+    '''))  # variable opcion recoge
+    if entrada_leer == 1:  # Consulta por ID
+        try:
+            criterio = input("Inserta el ID: ")
+            cursor = conexion.cursor()
+            cursor.execute("SELECT * FROM tabla WHERE id = %s", (criterio,))
+            resultados = cursor.fetchall()
+            return resultados
+        except Exception as e:
+            print(f"Error al realizar la consulta: {e}, el programa se cerrará")
+            conexion.rollback()
+            return
+        finally:
+            conexion.commit()
+            conexion.close()
+    elif entrada_leer == 2:  # Consulta por Columna
+        try:
+            criterio = input("Inserta el valor de la columna: ")
+            cursor = conexion.cursor()
+            cursor.execute("SELECT * FROM tabla WHERE columna = %s", (criterio,))
+            resultados = cursor.fetchall()
+            return resultados
+        except Exception as e:
+            print(f"Error al realizar la consulta: {e}, el programa se cerrará")
+            conexion.rollback()
+            return
+        finally:
+            conexion.commit()
+            conexion.close()
+    else:
+        print("Entrada de datos incorrecta, volviendo al menú")
+        menu()
 
-def actualizar(): #crea la funcion actualizar
-    print(3)
+
+def actualizar():
+    entrada_actualizar = int(input('''Has seleccionado actualizar un registro, elige el tipo de actualización
+    1. Actualizar Columna por ID
+    '''))  # opcion en variable
+    if entrada_actualizar == 1:  
+        try:
+            id = input("Inserta el ID del registro a actualizar: ")
+            nuevo_valor = input("Inserta el nuevo valor para la columna: ")
+            cursor = conexion.cursor()
+            cursor.execute("UPDATE tabla SET columna = %s WHERE id = %s", (nuevo_valor, id))
+            conexion.commit()
+        except Exception as e:
+            print(f"Error al actualizar el registro: {e}, el programa se cerrará")
+            conexion.rollback()
+            return
+        finally:
+            conexion.commit()
+            conexion.close()
+    else:
+        print("GAME OVER, volviendo al menú")
+        menu()
+
 
 def eliminar(): #crea la funcion eliminar
     entrada_crear = int(input('''Has seleccionado eliminar un registro, elige el numero de la tabla del que deseas eliminarlo
