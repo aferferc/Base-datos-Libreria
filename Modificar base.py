@@ -21,7 +21,7 @@ def crear(): #crea la funcion crear
             return
         finally: #si no sucede ningun error, guarda los cambios y termina la conexion con la base de datos
             conexion.commit
-            conexion.closes
+            conexion.close
     elif entrada_crear == 2:
         try: #trata de ejecutar el programa abajo
             valores_entrada = [(input("inserta la id del autor")), (input("inserta su nombre ")), (input("inserta su pais de origen"))] #recoge los valores pedidos en una variable
