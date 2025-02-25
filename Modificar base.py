@@ -54,8 +54,7 @@ def crear(): #crea la funcion crear
         print("Entrada de datos incorrecta, volviendo al menu")
         menu()
 
-def leer():
-  entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el numero de la tabla a la que deseas añadirlo
+entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el numero de la tabla a la que deseas añadirlo
     1.Libros
     2.Autores
     3.Ventas
@@ -69,7 +68,7 @@ def leer():
             try:
                 criterio = input("Inserta el ID: ")
                 cursor = conexion.cursor()
-                cursor.execute("SELECT * FROM tabla WHERE id = %s", (criterio,))
+                cursor.execute("SELECT * FROM Libros WHERE id = %s", (criterio,))
                 resultados = cursor.fetchall()
                 return resultados
             except Exception as e:
@@ -83,7 +82,7 @@ def leer():
             try:
                 criterio = input("Inserta el valor de la columna: ")
                 cursor = conexion.cursor()
-                cursor.execute("SELECT * FROM tabla WHERE columna = %s", (criterio,))
+                cursor.execute("SELECT * FROM Libros WHERE columna = %s", (criterio,))
                 resultados = cursor.fetchall()
                 return resultados
             except Exception as e:
@@ -105,7 +104,7 @@ def leer():
             try:
                 criterio = input("Inserta el ID: ")
                 cursor = conexion.cursor()
-                cursor.execute("SELECT * FROM tabla WHERE id = %s", (criterio,))
+                cursor.execute("SELECT * FROM Autores WHERE id = %s", (criterio,))
                 resultados = cursor.fetchall()
                 return resultados
             except Exception as e:
@@ -119,7 +118,7 @@ def leer():
             try:
                 criterio = input("Inserta el valor de la columna: ")
                 cursor = conexion.cursor()
-                cursor.execute("SELECT * FROM tabla WHERE columna = %s", (criterio,))
+                cursor.execute("SELECT * FROM Autores WHERE columna = %s", (criterio,))
                 resultados = cursor.fetchall()
                 return resultados
             except Exception as e:
@@ -141,7 +140,7 @@ def leer():
             try:
                 criterio = input("Inserta el ID: ")
                 cursor = conexion.cursor()
-                cursor.execute("SELECT * FROM tabla WHERE id = %s", (criterio,))
+                cursor.execute("SELECT * FROM Ventas WHERE id = %s", (criterio,))
                 resultados = cursor.fetchall()
                 return resultados
             except Exception as e:
@@ -155,7 +154,7 @@ def leer():
             try:
                 criterio = input("Inserta el valor de la columna: ")
                 cursor = conexion.cursor()
-                cursor.execute("SELECT * FROM tabla WHERE columna = %s", (criterio,))
+                cursor.execute("SELECT * FROM Ventas WHERE columna = %s", (criterio,))
                 resultados = cursor.fetchall()
                 return resultados
             except Exception as e:
