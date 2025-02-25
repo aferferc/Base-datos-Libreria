@@ -1,5 +1,6 @@
 import sqlite3 #Importa la libreria sqlite3 para hacer la base de datos
 conexion = sqlite3.connect("libreria.db") #conecta o en caso de que no exista crea la base de datos bajo el nombre libreria
+conexion.execute('PRAGMA foreign_keys= ON')
 
 
 def crear(): #crea la funcion crear
