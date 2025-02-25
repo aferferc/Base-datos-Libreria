@@ -55,7 +55,7 @@ def crear(): #crea la funcion crear
         menu()
 
 def leer(): #crea la funcion leer
-entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el numero de la tabla a la que deseas añadirlo
+    entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el numero de la tabla a la que deseas añadirlo
     1.Libros
     2.Autores
     3.Ventas
