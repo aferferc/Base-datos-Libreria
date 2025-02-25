@@ -54,6 +54,7 @@ def crear(): #crea la funcion crear
         print("Entrada de datos incorrecta, volviendo al menu")
         menu()
 
+def leer(): #crea la funcion leer
 entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el numero de la tabla a la que deseas añadirlo
     1.Libros
     2.Autores
@@ -170,25 +171,76 @@ entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el numero
 
 
 def actualizar():
-    entrada_actualizar = int(input('''Has seleccionado actualizar un registro, elige el tipo de actualización
-    1. Actualizar Columna por ID
-    '''))  # opcion en variable
-    if entrada_actualizar == 1:  
-        try:
-            id = input("Inserta el ID del registro a actualizar: ")
-            nuevo_valor = input("Inserta el nuevo valor para la columna: ")
-            cursor = conexion.cursor()
-            cursor.execute("UPDATE tabla SET columna = %s WHERE id = %s", (nuevo_valor, id))
-            conexion.commit()
-        except Exception as e:
-            print(f"Error al actualizar el registro: {e}, el programa se cerrará")
-            conexion.rollback()
-            return
-        finally:
-            conexion.commit()
-            conexion.close()
+    entrada_actualizar = int(input('''Has seleccionado hacer una consulta, elige el numero de la tabla a la que deseas añadirlo
+    1.Libros
+    2.Autores
+    3.Ventas
+    ''')) #recoge en una variable la obcion del usuario sobre que desea hacer tras darle las obciones
+    if entrada_actualizar == 1: #a partir de aqui comprueba el valor de la variable llamando a la funcion que toca, si el valor no encaja, le dice al usuario que la entrada es errone a y vuelve al menu
+        entrada_actualizar = int(input('''Has seleccionado actualizar un registro, elige el tipo de actualización
+        1. Actualizar Columna por ID
+        '''))  # opcion en variable
+        if entrada_actualizar == 1:  
+            try:
+                id = input("Inserta el ID del registro a actualizar: ")
+                nuevo_valor = input("Inserta el nuevo valor para la columna: ")
+                cursor = conexion.cursor()
+                cursor.execute("UPDATE Libros SET columna = %s WHERE id = %s", (nuevo_valor, id))
+                conexion.commit()
+            except Exception as e:
+                print(f"Error al actualizar el registro: {e}, el programa se cerrará")
+                conexion.rollback()
+                return
+            finally:
+                conexion.commit()
+                conexion.close()
+        else:
+            print("GAME OVER, volviendo al menú")
+            menu()
+    elif entrada_actualizar == 2:
+        entrada_actualizar = int(input('''Has seleccionado actualizar un registro, elige el tipo de actualización
+        1. Actualizar Columna por ID
+        '''))  # opcion en variable
+        if entrada_actualizar == 1:  
+            try:
+                id = input("Inserta el ID del registro a actualizar: ")
+                nuevo_valor = input("Inserta el nuevo valor para la columna: ")
+                cursor = conexion.cursor()
+                cursor.execute("UPDATE Autores SET columna = %s WHERE id = %s", (nuevo_valor, id))
+                conexion.commit()
+            except Exception as e:
+                print(f"Error al actualizar el registro: {e}, el programa se cerrará")
+                conexion.rollback()
+                return
+            finally:
+                conexion.commit()
+                conexion.close()
+        else:
+            print("GAME OVER, volviendo al menú")
+            menu()
+    elif entrada_actualizar == 3:
+        entrada_actualizar = int(input('''Has seleccionado actualizar un registro, elige el tipo de actualización
+        1. Actualizar Columna por ID
+        '''))  # opcion en variable
+        if entrada_actualizar == 1:  
+            try:
+                id = input("Inserta el ID del registro a actualizar: ")
+                nuevo_valor = input("Inserta el nuevo valor para la columna: ")
+                cursor = conexion.cursor()
+                cursor.execute("UPDATE Ventas SET columna = %s WHERE id = %s", (nuevo_valor, id))
+                conexion.commit()
+            except Exception as e:
+                print(f"Error al actualizar el registro: {e}, el programa se cerrará")
+                conexion.rollback()
+                return
+            finally:
+                conexion.commit()
+                conexion.close()
+        else:
+            print("GAME OVER, volviendo al menú")
+            menu()
     else:
-        print("GAME OVER, volviendo al menú")
+        print("Entrada de datos incorrecta, volviendo al menú")
         menu()
 
 
