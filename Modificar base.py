@@ -55,38 +55,116 @@ def crear(): #crea la funcion crear
         menu()
 
 def leer():
-    entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el tipo de consulta
-    1. Consulta por ID
-    2. Consulta por Columna
-    '''))  # variable opcion recoge
-    if entrada_leer == 1:  # Consulta por ID
-        try:
-            criterio = input("Inserta el ID: ")
-            cursor = conexion.cursor()
-            cursor.execute("SELECT * FROM tabla WHERE id = %s", (criterio,))
-            resultados = cursor.fetchall()
-            return resultados
-        except Exception as e:
-            print(f"Error al realizar la consulta: {e}, el programa se cerrará")
-            conexion.rollback()
-            return
-        finally:
-            conexion.commit()
-            conexion.close()
-    elif entrada_leer == 2:  # Consulta por Columna
-        try:
-            criterio = input("Inserta el valor de la columna: ")
-            cursor = conexion.cursor()
-            cursor.execute("SELECT * FROM tabla WHERE columna = %s", (criterio,))
-            resultados = cursor.fetchall()
-            return resultados
-        except Exception as e:
-            print(f"Error al realizar la consulta: {e}, el programa se cerrará")
-            conexion.rollback()
-            return
-        finally:
-            conexion.commit()
-            conexion.close()
+  entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el numero de la tabla a la que deseas añadirlo
+    1.Libros
+    2.Autores
+    3.Ventas
+    ''')) #recoge en una variable la obcion del usuario sobre que desea hacer tras darle las obciones
+    if entrada_leer == 1: #a partir de aqui comprueba el valor de la variable llamando a la funcion que toca, si el valor no encaja, le dice al usuario que la entrada es errone a y vuelve al menu
+        entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el tipo de consulta
+        1. Consulta por ID
+        2. Consulta por Columna
+        '''))  # variable opcion recoge
+        if entrada_leer == 1:  # Consulta por ID
+            try:
+                criterio = input("Inserta el ID: ")
+                cursor = conexion.cursor()
+                cursor.execute("SELECT * FROM tabla WHERE id = %s", (criterio,))
+                resultados = cursor.fetchall()
+                return resultados
+            except Exception as e:
+                print(f"Error al realizar la consulta: {e}, el programa se cerrará")
+                conexion.rollback()
+                return
+            finally:
+                conexion.commit()
+                conexion.close()
+        elif entrada_leer == 2:  # Consulta por Columna
+            try:
+                criterio = input("Inserta el valor de la columna: ")
+                cursor = conexion.cursor()
+                cursor.execute("SELECT * FROM tabla WHERE columna = %s", (criterio,))
+                resultados = cursor.fetchall()
+                return resultados
+            except Exception as e:
+                print(f"Error al realizar la consulta: {e}, el programa se cerrará")
+                conexion.rollback()
+                return
+            finally:
+                conexion.commit()
+                conexion.close()
+        else:
+            print("Entrada de datos incorrecta, volviendo al menú")
+            menu()
+    elif entrada_leer == 2:
+        entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el tipo de consulta
+        1. Consulta por ID
+        2. Consulta por Columna
+        '''))  # variable opcion recoge
+        if entrada_leer == 1:  # Consulta por ID
+            try:
+                criterio = input("Inserta el ID: ")
+                cursor = conexion.cursor()
+                cursor.execute("SELECT * FROM tabla WHERE id = %s", (criterio,))
+                resultados = cursor.fetchall()
+                return resultados
+            except Exception as e:
+                print(f"Error al realizar la consulta: {e}, el programa se cerrará")
+                conexion.rollback()
+                return
+            finally:
+                conexion.commit()
+                conexion.close()
+        elif entrada_leer == 2:  # Consulta por Columna
+            try:
+                criterio = input("Inserta el valor de la columna: ")
+                cursor = conexion.cursor()
+                cursor.execute("SELECT * FROM tabla WHERE columna = %s", (criterio,))
+                resultados = cursor.fetchall()
+                return resultados
+            except Exception as e:
+                print(f"Error al realizar la consulta: {e}, el programa se cerrará")
+                conexion.rollback()
+                return
+            finally:
+                conexion.commit()
+                conexion.close()
+        else:
+            print("Entrada de datos incorrecta, volviendo al menú")
+            menu()
+    elif entrada_leer == 3:
+        entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el tipo de consulta
+        1. Consulta por ID
+        2. Consulta por Columna
+        '''))  # variable opcion recoge
+        if entrada_leer == 1:  # Consulta por ID
+            try:
+                criterio = input("Inserta el ID: ")
+                cursor = conexion.cursor()
+                cursor.execute("SELECT * FROM tabla WHERE id = %s", (criterio,))
+                resultados = cursor.fetchall()
+                return resultados
+            except Exception as e:
+                print(f"Error al realizar la consulta: {e}, el programa se cerrará")
+                conexion.rollback()
+                return
+            finally:
+                conexion.commit()
+                conexion.close()
+        elif entrada_leer == 2:  # Consulta por Columna
+            try:
+                criterio = input("Inserta el valor de la columna: ")
+                cursor = conexion.cursor()
+                cursor.execute("SELECT * FROM tabla WHERE columna = %s", (criterio,))
+                resultados = cursor.fetchall()
+                return resultados
+            except Exception as e:
+                print(f"Error al realizar la consulta: {e}, el programa se cerrará")
+                conexion.rollback()
+                return
+            finally:
+                conexion.commit()
+                conexion.close()
     else:
         print("Entrada de datos incorrecta, volviendo al menú")
         menu()
