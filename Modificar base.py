@@ -55,195 +55,143 @@ def crear(): #crea la funcion crear
         print("Entrada de datos incorrecta, volviendo al menu")
         menu()
 
-def leer(): #crea la funcion leer
-    entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el numero de la tabla a la que deseas añadirlo
-    1.Libros
-    2.Autores
-    3.Ventas
-    ''')) #recoge en una variable la obcion del usuario sobre que desea hacer tras darle las obciones
-    if entrada_leer == 1: #a partir de aqui comprueba el valor de la variable llamando a la funcion que toca, si el valor no encaja, le dice al usuario que la entrada es errone a y vuelve al menu
-        entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el tipo de consulta
+#ZONA PELIGROSA, RIESGO DE PANTALLAZO AZUL SI SE EJECUTAN ESTAS FUNCIONES
+
+def leer():  # Crea la función leer
+    entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el número de la tabla a la que deseas hacer una consulta:
+    1. Libros
+    2. Autores
+    3. Ventas
+    '''))  # Recoge la opción del usuario
+
+    if entrada_leer == 1:  # Si selecciona Libros
+        entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el tipo de consulta:
         1. Consulta por ID
         2. Consulta por Columna
-        '''))  # variable opcion recoge
+        '''))  # Recoge la selección del usuario
         if entrada_leer == 1:  # Consulta por ID
             try:
-                criterio = input("Inserta el ID: ")
+                criterio = input("Inserta el ID del libro: ")
+                conexion = sqlite3.connect("libreria.db")
                 cursor = conexion.cursor()
-                cursor.execute("SELECT * FROM Libros WHERE id = %s", (criterio,))
+                cursor.execute("SELECT * FROM Libros WHERE ID_Libro = ?", (criterio,))
                 resultados = cursor.fetchall()
-                return resultados
+                print("Resultados de la consulta:", resultados)
             except Exception as e:
                 print(f"Error al realizar la consulta: {e}, el programa se cerrará")
-                conexion.rollback()
-                return
             finally:
-                conexion.commit()
                 conexion.close()
         elif entrada_leer == 2:  # Consulta por Columna
-            try:
-                criterio = input("Inserta el valor de la columna: ")
-                cursor = conexion.cursor()
-                cursor.execute("SELECT * FROM Libros WHERE columna = %s", (criterio,))
-                resultados = cursor.fetchall()
-                return resultados
-            except Exception as e:
-                print(f"Error al realizar la consulta: {e}, el programa se cerrará")
-                conexion.rollback()
-                return
-            finally:
-                conexion.commit()
-                conexion.close()
+            print("Esta funcionalidad no está completamente definida. Asegúrate de agregar lógica adecuada.")
         else:
-            print("Entrada de datos incorrecta, volviendo al menú")
-            menu()
-    elif entrada_leer == 2:
-        entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el tipo de consulta
+            print("Entrada de datos incorrecta, volviendo al menú.")
+    elif entrada_leer == 2:  # Si selecciona Autores
+        entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el tipo de consulta:
         1. Consulta por ID
         2. Consulta por Columna
-        '''))  # variable opcion recoge
+        '''))  # Recoge la selección del usuario
         if entrada_leer == 1:  # Consulta por ID
             try:
-                criterio = input("Inserta el ID: ")
+                criterio = input("Inserta el ID del autor: ")
+                conexion = sqlite3.connect("libreria.db")
                 cursor = conexion.cursor()
-                cursor.execute("SELECT * FROM Autores WHERE id = %s", (criterio,))
+                cursor.execute("SELECT * FROM Autores WHERE ID_Autor = ?", (criterio,))
                 resultados = cursor.fetchall()
-                return resultados
+                print("Resultados de la consulta:", resultados)
             except Exception as e:
                 print(f"Error al realizar la consulta: {e}, el programa se cerrará")
-                conexion.rollback()
-                return
             finally:
-                conexion.commit()
                 conexion.close()
         elif entrada_leer == 2:  # Consulta por Columna
-            try:
-                criterio = input("Inserta el valor de la columna: ")
-                cursor = conexion.cursor()
-                cursor.execute("SELECT * FROM Autores WHERE columna = %s", (criterio,))
-                resultados = cursor.fetchall()
-                return resultados
-            except Exception as e:
-                print(f"Error al realizar la consulta: {e}, el programa se cerrará")
-                conexion.rollback()
-                return
-            finally:
-                conexion.commit()
-                conexion.close()
+            print("Esta funcionalidad no está completamente definida. Asegúrate de agregar lógica adecuada.")
         else:
-            print("Entrada de datos incorrecta, volviendo al menú")
-            menu()
-    elif entrada_leer == 3:
-        entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el tipo de consulta
+            print("Entrada de datos incorrecta, volviendo al menú.")
+    elif entrada_leer == 3:  # Si selecciona Ventas
+        entrada_leer = int(input('''Has seleccionado hacer una consulta, elige el tipo de consulta:
         1. Consulta por ID
         2. Consulta por Columna
-        '''))  # variable opcion recoge
+        '''))  # Recoge la selección del usuario
         if entrada_leer == 1:  # Consulta por ID
             try:
-                criterio = input("Inserta el ID: ")
+                criterio = input("Inserta el ID de la venta: ")
+                conexion = sqlite3.connect("libreria.db")
                 cursor = conexion.cursor()
-                cursor.execute("SELECT * FROM Ventas WHERE id = %s", (criterio,))
+                cursor.execute("SELECT * FROM Ventas WHERE ID_Venta = ?", (criterio,))
                 resultados = cursor.fetchall()
-                return resultados
+                print("Resultados de la consulta:", resultados)
             except Exception as e:
                 print(f"Error al realizar la consulta: {e}, el programa se cerrará")
-                conexion.rollback()
-                return
             finally:
-                conexion.commit()
                 conexion.close()
         elif entrada_leer == 2:  # Consulta por Columna
-            try:
-                criterio = input("Inserta el valor de la columna: ")
-                cursor = conexion.cursor()
-                cursor.execute("SELECT * FROM Ventas WHERE columna = %s", (criterio,))
-                resultados = cursor.fetchall()
-                return resultados
-            except Exception as e:
-                print(f"Error al realizar la consulta: {e}, el programa se cerrará")
-                conexion.rollback()
-                return
-            finally:
-                conexion.commit()
-                conexion.close()
+            print("Esta funcionalidad no está completamente definida. Asegúrate de agregar lógica adecuada.")
+        else:
+            print("Entrada de datos incorrecta, volviendo al menú.")
     else:
-        print("Entrada de datos incorrecta, volviendo al menú")
-        menu()
+        print("Entrada de datos incorrecta, volviendo al menú.")
 
+def actualizar():  # Función para actualizar registros
+    entrada_actualizar = int(input('''Has seleccionado actualizar un registro. Elige el número de la tabla a la que deseas realizar la actualización:
+    1. Libros
+    2. Autores
+    3. Ventas
+    '''))  # Recoge la opción del usuario
 
-def actualizar():
-    entrada_actualizar = int(input('''Has seleccionado hacer una consulta, elige el numero de la tabla a la que deseas añadirlo
-    1.Libros
-    2.Autores
-    3.Ventas
-    ''')) #recoge en una variable la obcion del usuario sobre que desea hacer tras darle las obciones
-    if entrada_actualizar == 1: #a partir de aqui comprueba el valor de la variable llamando a la funcion que toca, si el valor no encaja, le dice al usuario que la entrada es errone a y vuelve al menu
-        entrada_actualizar = int(input('''Has seleccionado actualizar un registro, elige el tipo de actualización
-        1. Actualizar Columna por ID
-        '''))  # opcion en variable
-        if entrada_actualizar == 1:  
-            try:
-                id = input("Inserta el ID del registro a actualizar: ")
-                nuevo_valor = input("Inserta el nuevo valor para la columna: ")
-                cursor = conexion.cursor()
-                cursor.execute("UPDATE Libros SET columna = %s WHERE id = %s", (nuevo_valor, id))
-                conexion.commit()
-            except Exception as e:
-                print(f"Error al actualizar el registro: {e}, el programa se cerrará")
-                conexion.rollback()
-                return
-            finally:
-                conexion.commit()
-                conexion.close()
-        else:
-            print("GAME OVER, volviendo al menú")
-            menu()
-    elif entrada_actualizar == 2:
-        entrada_actualizar = int(input('''Has seleccionado actualizar un registro, elige el tipo de actualización
-        1. Actualizar Columna por ID
-        '''))  # opcion en variable
-        if entrada_actualizar == 1:  
-            try:
-                id = input("Inserta el ID del registro a actualizar: ")
-                nuevo_valor = input("Inserta el nuevo valor para la columna: ")
-                cursor = conexion.cursor()
-                cursor.execute("UPDATE Autores SET columna = %s WHERE id = %s", (nuevo_valor, id))
-                conexion.commit()
-            except Exception as e:
-                print(f"Error al actualizar el registro: {e}, el programa se cerrará")
-                conexion.rollback()
-                return
-            finally:
-                conexion.commit()
-                conexion.close()
-        else:
-            print("GAME OVER, volviendo al menú")
-            menu()
-    elif entrada_actualizar == 3:
-        entrada_actualizar = int(input('''Has seleccionado actualizar un registro, elige el tipo de actualización
-        1. Actualizar Columna por ID
-        '''))  # opcion en variable
-        if entrada_actualizar == 1:  
-            try:
-                id = input("Inserta el ID del registro a actualizar: ")
-                nuevo_valor = input("Inserta el nuevo valor para la columna: ")
-                cursor = conexion.cursor()
-                cursor.execute("UPDATE Ventas SET columna = %s WHERE id = %s", (nuevo_valor, id))
-                conexion.commit()
-            except Exception as e:
-                print(f"Error al actualizar el registro: {e}, el programa se cerrará")
-                conexion.rollback()
-                return
-            finally:
-                conexion.commit()
-                conexion.close()
-        else:
-            print("GAME OVER, volviendo al menú")
-            menu()
-    else:
-        print("Entrada de datos incorrecta, volviendo al menú")
-        menu()
+    if entrada_actualizar == 1:  # Si selecciona Libros
+        try:
+            id = input("Inserta el ID del libro a actualizar: ")
+            columna = input("Inserta el nombre de la columna que deseas actualizar (por ejemplo, Titulo, Genero, etc.): ")
+            nuevo_valor = input(f"Inserta el nuevo valor para la columna '{columna}': ")
+            conexion = sqlite3.connect("libreria.db")
+            cursor = conexion.cursor()
+            query = f"UPDATE Libros SET {columna} = ? WHERE ID_Libro = ?"
+            cursor.execute(query, (nuevo_valor, id))
+            conexion.commit()
+            print(f"Registro actualizado correctamente en la tabla 'Libros'.")
+        except Exception as e:
+            print(f"Error al actualizar el registro en la tabla 'Libros': {e}")
+            conexion.rollback()
+        finally:
+            conexion.close()
 
+    elif entrada_actualizar == 2:  # Si selecciona Autores
+        try:
+            id = input("Inserta el ID del autor a actualizar: ")
+            columna = input("Inserta el nombre de la columna que deseas actualizar (por ejemplo, Nombre, Pais_Origen): ")
+            nuevo_valor = input(f"Inserta el nuevo valor para la columna '{columna}': ")
+            conexion = sqlite3.connect("libreria.db")
+            cursor = conexion.cursor()
+            query = f"UPDATE Autores SET {columna} = ? WHERE ID_Autor = ?"
+            cursor.execute(query, (nuevo_valor, id))
+            conexion.commit()
+            print(f"Registro actualizado correctamente en la tabla 'Autores'.")
+        except Exception as e:
+            print(f"Error al actualizar el registro en la tabla 'Autores': {e}")
+            conexion.rollback()
+        finally:
+            conexion.close()
+
+    elif entrada_actualizar == 3:  # Si selecciona Ventas
+        try:
+            id = input("Inserta el ID de la venta a actualizar: ")
+            columna = input("Inserta el nombre de la columna que deseas actualizar (por ejemplo, Fecha_Venta, Cantidad_Vendidos, Precio_Total): ")
+            nuevo_valor = input(f"Inserta el nuevo valor para la columna '{columna}': ")
+            conexion = sqlite3.connect("libreria.db")
+            cursor = conexion.cursor()
+            query = f"UPDATE Ventas SET {columna} = ? WHERE ID_Venta = ?"
+            cursor.execute(query, (nuevo_valor, id))
+            conexion.commit()
+            print(f"Registro actualizado correctamente en la tabla 'Ventas'.")
+        except Exception as e:
+            print(f"Error al actualizar el registro en la tabla 'Ventas': {e}")
+            conexion.rollback()
+        finally:
+            conexion.close()
+
+    else:  # Entrada incorrecta
+        print("Entrada de datos incorrecta, volviendo al menú.")
+
+#FIN DE LA ZONA PELIGROSA
 
 def eliminar(): #crea la funcion eliminar
     entrada_crear = int(input('''Has seleccionado eliminar un registro, elige el numero de la tabla del que deseas eliminarlo
@@ -317,3 +265,4 @@ def menu(): #crea la funcion menu
         return
 
 menu()
+
